@@ -1,8 +1,0 @@
-<resources>
-    <style name="Theme.BlockMe" parent="Theme.Material3.DayNight.NoActionBar" />
-    <style name="Theme.BlockMe.SplashScreen" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/splash_background</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
-        <item name="postSplashScreenTheme">@style/Theme.BlockMe</item>
-    </style>
-</resources>
