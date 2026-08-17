@@ -1,0 +1,129 @@
+<resources>
+    <string name="app_name">Block me</string>
+    <string name="app_tagline">Master Your Focus</string>
+
+    <!-- Accessibility Service -->
+    <string name="accessibility_service_description">Block me uses the Accessibility Service to detect when you press Home, Back, or Recent Apps during a lockdown session. When detected, your screen is locked immediately to prevent distraction. This service does NOT read any personal data, text, or content from your apps.</string>
+    <string name="accessibility_service_label">Block me Lockdown</string>
+
+    <!-- Device Admin -->
+    <string name="device_admin_description">Block me requires Device Administrator permission to lock your screen when you attempt to navigate away during a focus session. This is the core feature that makes distraction impossible.</string>
+
+    <!-- Permissions -->
+    <string name="perm_overlay_title">Display Over Other Apps</string>
+    <string name="perm_overlay_desc">Required to show the fullscreen lockdown timer above all other apps during a focus session.</string>
+    <string name="perm_accessibility_title">Accessibility Service</string>
+    <string name="perm_accessibility_desc">Required to detect Home, Back, and Recent Apps presses and lock your screen immediately.</string>
+    <string name="perm_device_admin_title">Device Admin — Required / Must</string>
+    <string name="perm_device_admin_desc">Required to lock the screen when a blocked action is detected. Without this, the core lockdown cannot function.</string>
+    <string name="perm_battery_title">Ignore Battery Optimizations</string>
+    <string name="perm_battery_desc">Required to keep the focus timer running reliably in the background without being killed by the system.</string>
+    <string name="perm_notifications_title">Notifications</string>
+    <string name="perm_notifications_desc">Required to show the ongoing focus session notification with remaining time.</string>
+    <string name="perm_alarm_title">Exact Alarms</string>
+    <string name="perm_alarm_desc">Required for scheduled focus sessions to start at the exact configured time.</string>
+
+    <!-- Buttons -->
+    <string name="btn_grant">Grant Permission</string>
+    <string name="btn_enable">Enable</string>
+    <string name="btn_go">Go</string>
+    <string name="btn_start">Start Focus</string>
+    <string name="btn_stop">Stop</string>
+    <string name="btn_save">Save</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_add_schedule">Add Schedule</string>
+
+    <!-- Status -->
+    <string name="status_granted">Granted</string>
+    <string name="status_not_granted">Not Granted</string>
+    <string name="status_enabled">Enabled</string>
+    <string name="status_disabled">Disabled</string>
+
+    <!-- Timer -->
+    <string name="timer_idle">Ready to focus</string>
+    <string name="timer_running">Stay strong</string>
+    <string name="timer_completed">Session Complete!</string>
+    <string name="focus_goal_hint">What\'s your focus goal? (optional)</string>
+    <string name="timer_duration_label">Duration</string>
+    <string name="timer_custom">Custom</string>
+    <string name="timer_max_warning">Maximum 3 hours allowed</string>
+
+    <!-- Notification -->
+    <string name="notif_channel_session_name">Focus Session</string>
+    <string name="notif_channel_session_desc">Shows your active focus session status</string>
+    <string name="notif_channel_reminder_name">Session Reminders</string>
+    <string name="notif_channel_reminder_desc">Reminders before scheduled sessions start</string>
+    <string name="notif_session_title">Focus Session Active</string>
+    <string name="notif_session_content">%s remaining</string>
+    <string name="notif_view_timer">View Timer</string>
+    <string name="notif_reminder_title">Focus session starting soon</string>
+    <string name="notif_reminder_content">Your %s focus session starts in 5 minutes</string>
+
+    <!-- Stats -->
+    <string name="stats_total_sessions">Total Sessions</string>
+    <string name="stats_total_hours">Total Hours</string>
+    <string name="stats_current_streak">Current Streak</string>
+    <string name="stats_longest_streak">Longest Streak</string>
+    <string name="stats_avg_duration">Avg Duration</string>
+    <string name="stats_temptations">Temptation Attempts</string>
+    <string name="stats_days">days</string>
+    <string name="stats_no_data">No sessions yet. Start your first focus session!</string>
+
+    <!-- Settings -->
+    <string name="settings_haptic">Haptic Pulse</string>
+    <string name="settings_haptic_desc">Vibrate every minute during session</string>
+    <string name="settings_amoled">AMOLED Dark Mode</string>
+    <string name="settings_amoled_desc">Use pure black background for AMOLED screens</string>
+    <string name="settings_unlock_challenge">Unlock Challenge</string>
+    <string name="settings_unlock_challenge_desc">Require a challenge to exit early</string>
+    <string name="settings_export">Export Data</string>
+    <string name="settings_export_desc">Export all focus data as JSON</string>
+    <string name="settings_about">About Block me</string>
+    <string name="settings_version">Version %s</string>
+    <string name="settings_license">GPL-3.0 Open Source</string>
+    <string name="settings_privacy">We don\'t collect anything, period.</string>
+
+    <!-- Overlay -->
+    <string name="overlay_phone_btn">Call</string>
+    <string name="overlay_stay_strong">Stay strong!</string>
+    <string name="overlay_locked">Focus Mode Active</string>
+
+    <!-- Motivational quotes -->
+    <string-array name="motivational_quotes">
+        <item>Discipline is choosing between what you want now and what you want most.</item>
+        <item>Focus is the art of knowing what to ignore.</item>
+        <item>Your future self is watching you right now through your memories.</item>
+        <item>The successful warrior is the average person, with laser-like focus.</item>
+        <item>Concentrate all your thoughts upon the work at hand.</item>
+        <item>Where focus goes, energy flows.</item>
+        <item>Deep work is the superpower of the 21st century.</item>
+        <item>You are stronger than your urges.</item>
+        <item>Every minute you protect is a minute invested in your future.</item>
+        <item>Distraction is the enemy of greatness.</item>
+    </string-array>
+
+    <!-- Navigation -->
+    <string name="nav_timer">Timer</string>
+    <string name="nav_stats">Stats</string>
+    <string name="nav_schedule">Schedule</string>
+    <string name="nav_settings">Settings</string>
+
+    <!-- Schedules -->
+    <string name="schedule_daily">Every Day</string>
+    <string name="schedule_weekdays">Weekdays</string>
+    <string name="schedule_weekends">Weekends</string>
+    <string name="schedule_custom_days">Custom Days</string>
+    <string name="schedule_no_schedules">No schedules yet. Add one to automate your focus!</string>
+
+    <!-- Celebration -->
+    <string name="celebration_title">🎉 Session Complete!</string>
+    <string name="celebration_message">You stayed focused for the entire session. Great work!</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_welcome_title">Block me</string>
+    <string name="onboarding_welcome_subtitle">Your no-compromise focus companion</string>
+    <string name="onboarding_welcome_desc">Block me locks your phone completely during focus sessions, helping you eliminate distractions and build deep work habits.</string>
+    <string name="onboarding_permissions_title">Setup Permissions</string>
+    <string name="onboarding_permissions_subtitle">Grant all permissions to enable full lockdown</string>
+    <string name="onboarding_go_hint">Grant all permissions above to continue</string>
+</resources>
