@@ -30,9 +30,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Removed emojis from emergency unlock dialogs and confirmation sheets.
 
 ### Fixed
+- Fixed duplicate notifications by migrating to a single foreground service architecture (`TimerForegroundService`), completely eliminating the stuck `00:00:00` notification.
 - Fixed main-thread ANR ("App isn't responding / Force close") caused by synchronous Binder IPC during Volume key and Notification shade interactions.
 - Whitelisted OEM volume panels, quick settings, and SystemUI components in `LockdownAccessibilityService` to prevent false lockdown triggers.
-- Fixed repeated app crashes on resume (`ForegroundServiceDidNotStartInTimeException`) by ensuring `LockdownOverlayService` immediately fulfills foreground service contracts.
+- Fixed repeated app crashes on resume (`ForegroundServiceDidNotStartInTimeException`) by ensuring `LockdownOverlayService` runs purely as a window overlay service.
 - Fixed bug where the overlay remained stuck on screen at `00:00:00` after timer expiration by reacting to `isSessionActive` state changes and `ACTION_SESSION_COMPLETE` broadcasts.
 - Fixed 1-second (`00:00:01`) slider edge-case by enforcing a strict 1-minute minimum limit.
 
