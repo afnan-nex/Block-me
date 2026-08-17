@@ -2,7 +2,7 @@
 
 > **Your no-compromise focus companion.** Open-source Android full-phone lockdown timer for digital wellbeing.
 
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![CI](https://github.com/blockme-app/block-me/actions/workflows/ci.yml/badge.svg)](https://github.com/blockme-app/block-me/actions)
 [![Min SDK](https://img.shields.io/badge/minSdk-26-green)](https://developer.android.com/about/versions/oreo)
 
@@ -47,7 +47,7 @@ No pause. No early exit. No compromise.
 | Social accountability | 🚧 Planned |
 | Zero network calls | ✅ |
 | No tracking, no ads | ✅ |
-| GPL-3.0 open source | ✅ |
+| MIT open source | ✅ |
 
 ---
 
@@ -144,4 +144,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 
-GNU General Public License v3.0 — see [LICENSE](LICENSE).
+MIT License — see [LICENSE](LICENSE).

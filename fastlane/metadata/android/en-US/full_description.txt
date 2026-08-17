@@ -21,6 +21,6 @@ PRIVACY:
 • All data stored locally
 • No analytics, no tracking, no ads, no account
 • We don't collect anything, period.
-• GPL-3.0 open source — fully auditable
+• MIT open source — fully auditable
 
 Unlike commercial focus apps that charge for strict mode, Block me is completely free with full strict mode included.

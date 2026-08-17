@@ -40,7 +40,7 @@ import com.blockme.core.ui.R
  * Configures haptic, AMOLED mode, and displays app info & developer attribution
  * with authentic GitHub logo icon button.
  *
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 @Composable
 fun SettingsScreen(
@@ -140,7 +140,7 @@ fun SettingsScreen(
                 )
                 Spacer(modifier = Modifier.height(2.dp))
                 Text(
-                    text = "v1.0.0 · GPL-3.0 Open Source",
+                    text = "MIT License",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )

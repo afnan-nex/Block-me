@@ -52,7 +52,7 @@ The Device Admin usage is fully visible in:
 - `app/src/main/java/com/blockme/app/util/ScreenLockManager.kt` — the only place `lockNow()` is called
 - `app/src/main/java/com/blockme/app/service/LockdownDeviceAdminReceiver.kt` — the receiver callbacks
 
-Block me is GPL-3.0 open source. You can verify every use of Device Admin in the codebase.
+Block me is MIT open source. You can verify every use of Device Admin in the codebase.
 
 ---
 

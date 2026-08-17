@@ -44,7 +44,7 @@ Block me is fully open source. You can read the exact implementation of the Acce
 
 `app/src/main/java/com/blockme/app/service/LockdownAccessibilityService.kt`
 
-The code is licensed under GPL-3.0, meaning anyone can audit, fork, and verify it.
+The code is licensed under the MIT License, meaning anyone can audit, fork, and verify it.
 
 ---
 

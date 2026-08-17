@@ -80,7 +80,7 @@
     <string name="settings_export_desc">Export all focus data as JSON</string>
     <string name="settings_about">About Block me</string>
     <string name="settings_version">Version %s</string>
-    <string name="settings_license">GPL-3.0 Open Source</string>
+    <string name="settings_license">MIT License</string>
     <string name="settings_privacy">We don\'t collect anything, period.</string>
 
     <!-- Overlay -->
