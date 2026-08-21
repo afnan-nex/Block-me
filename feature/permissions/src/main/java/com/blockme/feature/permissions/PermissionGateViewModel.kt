@@ -22,7 +22,7 @@ import javax.inject.Inject
 
 /**
  * Enum of all mandatory permissions the app requires.
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 enum class PermissionItem {
     OVERLAY,

@@ -20,7 +20,7 @@ import javax.inject.Singleton
  * Creates and manages notification channels and persistent session notification.
  * Uses dedicated custom vector status bar icon [R.drawable.ic_notification].
  *
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 @Singleton
 class NotificationHelper @Inject constructor(

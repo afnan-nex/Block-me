@@ -30,7 +30,7 @@ import java.util.concurrent.TimeUnit
  * Pure-Compose Material 3 stats charts.
  *
  * Utilizes [MaterialTheme.colorScheme] primary and surfaceContainer tokens without hardcoded hexes.
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 
 /**

@@ -41,7 +41,7 @@ import com.blockme.core.ui.components.FocusGoalInput
 /**
  * Material 3 Timer Setup Screen.
  *
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 @Composable
 fun TimerSetupScreen(

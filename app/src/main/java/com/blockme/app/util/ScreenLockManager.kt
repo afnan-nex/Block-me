@@ -15,7 +15,7 @@ import javax.inject.Singleton
  * Wraps [DevicePolicyManager.lockNow] with vibration feedback.
  *
  * Called by AccessibilityService on blocked action detection.
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 @Singleton
 class ScreenLockManager @Inject constructor(

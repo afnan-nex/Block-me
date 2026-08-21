@@ -5,7 +5,7 @@ import javax.inject.Inject
 
 /**
  * Use case to end (complete) an active focus session.
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 class EndSessionUseCase @Inject constructor(
     private val sessionRepository: SessionRepository,

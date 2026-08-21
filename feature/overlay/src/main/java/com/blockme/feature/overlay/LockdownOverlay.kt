@@ -89,7 +89,7 @@ fun normalizeWords(text: String): List<String> {
  * - Emergency Phone mode: Draggable mini floating timer popup leaving Phone app fully usable.
  * - 80-Tap Emergency Unlock: Word-by-word verified 42-word pledge challenge without distraction while typing.
  *
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 @Composable
 fun LockdownOverlayContent(
@@ -97,6 +97,7 @@ fun LockdownOverlayContent(
     totalMs: Long,
     goalText: String,
     isPhoneAppMode: Boolean,
+    isUnlockChallengeEnabled: Boolean = true,
     onPhoneButtonClicked: () -> Unit,
     onReturnFromPhoneApp: () -> Unit,
     onFloatingDrag: (dx: Float, dy: Float) -> Unit,
@@ -105,6 +106,13 @@ fun LockdownOverlayContent(
     BlockMeTheme(darkTheme = true) {
         var tapCount by remember { mutableIntStateOf(0) }
         var showUnlockChallenge by remember { mutableStateOf(false) }
+
+        androidx.compose.runtime.LaunchedEffect(isUnlockChallengeEnabled) {
+            if (!isUnlockChallengeEnabled) {
+                tapCount = 0
+                showUnlockChallenge = false
+            }
+        }
 
         if (isPhoneAppMode) {
             // Draggable Floating Mini Timer Popup in Phone App Mode
@@ -131,16 +139,18 @@ fun LockdownOverlayContent(
                 ) {
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    // Center countdown timer + 120-tap detector
+                    // Center countdown timer + 120-tap detector (only if unlock challenge is enabled)
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Box(
                             contentAlignment = Alignment.Center,
                             modifier = Modifier.clickable(
+                                enabled = isUnlockChallengeEnabled,
                                 interactionSource = remember { MutableInteractionSource() },
                                 indication = null
                             ) {
+                                if (!isUnlockChallengeEnabled) return@clickable
                                 tapCount++
                                 if (tapCount >= 120) {
                                     tapCount = 0
@@ -159,7 +169,7 @@ fun LockdownOverlayContent(
                             )
                         }
 
-                        if (tapCount in 10..119) {
+                        if (isUnlockChallengeEnabled && tapCount in 10..119) {
                             Spacer(modifier = Modifier.height(8.dp))
                             Text(
                                 text = "Emergency unlock: $tapCount / 120 taps",
@@ -210,7 +220,7 @@ fun LockdownOverlayContent(
 
                 // In-Place 80-Tap 42-Word Typing Challenge Sheet
                 AnimatedVisibility(
-                    visible = showUnlockChallenge,
+                    visible = isUnlockChallengeEnabled && showUnlockChallenge,
                     enter = fadeIn() + slideInVertically(initialOffsetY = { it / 2 }),
                     exit = fadeOut() + slideOutVertically(targetOffsetY = { it / 2 }),
                     modifier = Modifier.fillMaxSize()

@@ -9,7 +9,7 @@ import org.junit.Test
 
 /**
  * Unit tests for timer math and duration validation.
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 class TimerManagerTest {
 

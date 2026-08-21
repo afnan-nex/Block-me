@@ -23,7 +23,7 @@ import javax.inject.Singleton
 
 /**
  * Hilt module for data layer dependencies.
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 @Module
 @InstallIn(SingletonComponent::class)

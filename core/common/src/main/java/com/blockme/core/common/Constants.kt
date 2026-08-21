@@ -2,7 +2,7 @@ package com.blockme.core.common
 
 /**
  * App-wide constants.
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 object Constants {
 

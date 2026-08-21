@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 /**
  * Repository interface for focus goals.
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 interface GoalRepository {
     suspend fun insertOrUpdate(goal: FocusGoal): Long

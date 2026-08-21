@@ -8,7 +8,7 @@ import androidx.compose.ui.graphics.Color
  * Designed with a refined, focused indigo/slate primary key and teal/mint accents
  * prioritizing legibility, accessibility, and high contrast.
  *
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 
 // ── Dark Theme M3 Tonal Palette ──────────────────────────────────────────────

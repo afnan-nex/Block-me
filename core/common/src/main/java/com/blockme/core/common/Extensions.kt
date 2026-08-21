@@ -4,15 +4,25 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
+import java.util.Locale
 import java.util.concurrent.TimeUnit
 
 /**
  * App-wide Kotlin extension functions.
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 
 // DataStore singleton per Context
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = Constants.DATASTORE_NAME)
+
+/**
+ * Format hour (0-23) and minute (0-59) to 12-hour time string with AM/PM (e.g. "09:00 AM", "12:30 PM").
+ */
+fun formatTimeWithAmPm(hourOfDay: Int, minuteOfHour: Int): String {
+    val hour12 = if (hourOfDay % 12 == 0) 12 else hourOfDay % 12
+    val amPm = if (hourOfDay < 12) "AM" else "PM"
+    return String.format(Locale.getDefault(), "%02d:%02d %s", hour12, minuteOfHour, amPm)
+}
 
 /**
  * Format milliseconds to HH:MM:SS string.

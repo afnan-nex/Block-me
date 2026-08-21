@@ -11,7 +11,6 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
-
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -20,8 +19,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "BlockMe"
-
+rootProject.name = "Block-me"
 include(":app")
 include(":core:common")
 include(":core:data")

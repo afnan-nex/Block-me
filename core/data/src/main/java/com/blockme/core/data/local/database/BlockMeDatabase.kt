@@ -9,7 +9,7 @@ import com.blockme.core.common.Constants
 
 /**
  * Room database — single source of truth for all locally persisted data.
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 @Database(
     entities = [SessionEntity::class, GoalEntity::class, ScheduleEntity::class],

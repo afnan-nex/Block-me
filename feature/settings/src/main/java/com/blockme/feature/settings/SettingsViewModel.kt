@@ -14,7 +14,7 @@ import javax.inject.Inject
 data class SettingsUiState(
     val hapticEnabled: Boolean = false,
     val amoledMode: Boolean = false,
-    val unlockChallengeEnabled: Boolean = false,
+    val unlockChallengeEnabled: Boolean = true,
     val unlockChallengeType: String = "MATH"
 )
 

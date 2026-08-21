@@ -11,7 +11,7 @@ import android.widget.Toast
  * Device Admin is REQUIRED for Block me's core lockdown feature.
  * Without it, the app cannot lock the screen when blocked actions are detected.
  *
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 class LockdownDeviceAdminReceiver : DeviceAdminReceiver() {
 

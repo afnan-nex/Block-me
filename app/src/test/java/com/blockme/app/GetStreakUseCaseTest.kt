@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit
 
 /**
  * Unit tests for streak calculation in GetSessionStatsUseCase.
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 class GetStreakUseCaseTest {
 

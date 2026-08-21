@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 /**
  * Use case to compute aggregated session statistics.
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 class GetSessionStatsUseCase @Inject constructor(
     private val sessionRepository: SessionRepository,

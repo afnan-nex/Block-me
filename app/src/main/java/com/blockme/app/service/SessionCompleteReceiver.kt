@@ -7,7 +7,7 @@ import com.blockme.core.common.Constants
 
 /**
  * Receives the session complete broadcast and signals MainActivity to show celebration.
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 class SessionCompleteReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {

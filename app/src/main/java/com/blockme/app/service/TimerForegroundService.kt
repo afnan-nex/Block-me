@@ -24,7 +24,7 @@ import javax.inject.Inject
 /**
  * Foreground service that runs the timer countdown and updates the persistent notification.
  *
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 @AndroidEntryPoint
 class TimerForegroundService : Service() {
@@ -77,6 +77,13 @@ class TimerForegroundService : Service() {
                     remaining.coerceAtLeast(0L), goalText
                 )
                 startForeground(Constants.NOTIFICATION_ID_SESSION, notification)
+
+                try {
+                    startService(Intent(this@TimerForegroundService, LockdownOverlayService::class.java))
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+
                 runTimerLoop(endTimeMs, goalText)
             } else {
                 notificationHelper.cancelSessionNotification()

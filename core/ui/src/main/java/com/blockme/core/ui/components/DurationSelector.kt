@@ -28,7 +28,7 @@ import com.blockme.core.common.Constants
  * Minimum duration: 1 minute (60,000 ms).
  * Maximum duration: 3 hours (180 minutes).
  *
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 @Composable
 fun DurationSelector(

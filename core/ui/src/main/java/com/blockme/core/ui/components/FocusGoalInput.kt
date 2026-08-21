@@ -18,7 +18,7 @@ import com.blockme.core.domain.model.FocusGoal
 
 /**
  * Focus goal text input with recent goals as quick-select chips.
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 @OptIn(ExperimentalLayoutApi::class)
 @Composable

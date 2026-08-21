@@ -11,7 +11,7 @@ import javax.inject.Singleton
 /**
  * Determines the default dialer/phone app and launches it with OEM-safe fallbacks.
  *
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 @Singleton
 class PhoneAppLauncher @Inject constructor(

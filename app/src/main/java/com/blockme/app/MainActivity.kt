@@ -54,7 +54,7 @@ import javax.inject.Inject
  * Implements real-time permission enforcement on every resume and state change,
  * dynamic color support, and M3 NavigationBar.
  *
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {

@@ -51,7 +51,7 @@ import androidx.lifecycle.repeatOnLifecycle
  * Employs clean M3 OutlinedCard containment, tonal status chips,
  * and adaptive color roles without artificial gradients.
  *
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 @Composable
 fun PermissionGateScreen(

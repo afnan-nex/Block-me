@@ -3,51 +3,86 @@ package com.blockme.app.service
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import androidx.core.content.ContextCompat
 import com.blockme.core.common.Constants
-import com.blockme.core.common.dataStore
-import androidx.datastore.preferences.core.longPreferencesKey
-import androidx.datastore.preferences.core.stringPreferencesKey
+import com.blockme.core.data.local.preferences.UserPreferences
+import com.blockme.core.domain.repository.ScheduleRepository
+import com.blockme.feature.schedule.ScheduleAlarmScheduler
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 /**
  * BroadcastReceiver that handles scheduled alarm intents.
  *
- * On receiving a scheduled session alarm, starts the overlay and timer services.
+ * On receiving a scheduled session alarm, starts the timer foreground service and overlay,
+ * and reschedules the next recurrence of the schedule.
  * On receiving a reminder alarm, shows a reminder notification.
  *
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
+@AndroidEntryPoint
 class AlarmReceiver : BroadcastReceiver() {
 
+    @Inject lateinit var userPreferences: UserPreferences
+    @Inject lateinit var scheduleRepository: ScheduleRepository
+    @Inject lateinit var scheduleAlarmScheduler: ScheduleAlarmScheduler
+
     override fun onReceive(context: Context, intent: Intent) {
+        val pendingResult = goAsync()
         when (intent.action) {
             Constants.ACTION_SCHEDULED_SESSION -> {
                 val durationMs = intent.getLongExtra(Constants.EXTRA_DURATION_MS, 0L)
                 val goal = intent.getStringExtra(Constants.EXTRA_GOAL) ?: ""
+                val scheduleId = intent.getLongExtra(Constants.EXTRA_SCHEDULE_ID, -1L)
 
-                if (durationMs <= 0L) return
+                if (durationMs <= 0L) {
+                    pendingResult.finish()
+                    return
+                }
 
                 val scope = CoroutineScope(Dispatchers.IO)
                 scope.launch {
-                    val now = System.currentTimeMillis()
-                    val endTimeMs = now + durationMs
+                    try {
+                        val now = System.currentTimeMillis()
+                        val endTimeMs = now + durationMs
 
-                    // Write session state atomically to DataStore
-                    context.dataStore.updateData { prefs ->
-                        prefs.toMutablePreferences().apply {
-                            set(androidx.datastore.preferences.core.booleanPreferencesKey(Constants.KEY_IS_SESSION_ACTIVE), true)
-                            set(longPreferencesKey(Constants.KEY_SESSION_END_TIME), endTimeMs)
-                            set(longPreferencesKey(Constants.KEY_SESSION_START_TIME), now)
-                            set(longPreferencesKey(Constants.KEY_SESSION_DURATION_MS), durationMs)
-                            set(stringPreferencesKey(Constants.KEY_SESSION_GOAL), goal)
+                        // Write session state atomically to DataStore
+                        userPreferences.startSession(
+                            endTimeMs = endTimeMs,
+                            startTimeMs = now,
+                            durationMs = durationMs,
+                            goal = goal,
+                            sessionId = -1L
+                        )
+
+                        // Start Foreground Service for timer & ongoing notification
+                        val serviceIntent = Intent(context, TimerForegroundService::class.java)
+                        try {
+                            ContextCompat.startForegroundService(context, serviceIntent)
+                        } catch (e: Exception) {
+                            try {
+                                context.startService(serviceIntent)
+                            } catch (e2: Exception) {
+                                e2.printStackTrace()
+                            }
                         }
-                    }
 
-                    context.startService(Intent(context, LockdownOverlayService::class.java))
-                    context.startForegroundService(Intent(context, TimerForegroundService::class.java))
+                        // Reschedule next recurrence of this schedule
+                        if (scheduleId != -1L) {
+                            val schedule = scheduleRepository.getScheduleById(scheduleId)
+                            if (schedule != null && schedule.enabled) {
+                                scheduleAlarmScheduler.scheduleAlarm(schedule)
+                                scheduleAlarmScheduler.scheduleReminder(schedule)
+                            }
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    } finally {
+                        pendingResult.finish()
+                    }
                 }
             }
 
@@ -55,9 +90,17 @@ class AlarmReceiver : BroadcastReceiver() {
                 val goal = intent.getStringExtra(Constants.EXTRA_GOAL) ?: ""
                 val durationMs = intent.getLongExtra(Constants.EXTRA_DURATION_MS, 0L)
                 val durationLabel = formatDuration(durationMs)
-                // NotificationHelper not injectable in a BroadcastReceiver without WorkManager
-                // Use a direct notification for simplicity
-                showReminderNotification(context, goal, durationLabel)
+                try {
+                    showReminderNotification(context, goal, durationLabel)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                } finally {
+                    pendingResult.finish()
+                }
+            }
+
+            else -> {
+                pendingResult.finish()
             }
         }
     }
@@ -81,3 +124,4 @@ class AlarmReceiver : BroadcastReceiver() {
         manager.notify(Constants.NOTIFICATION_ID_REMINDER, notification)
     }
 }
+

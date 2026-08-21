@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.sp
  * Typography using system default with Inter-like sizing.
  *
  * Note: In production add the Inter font to res/font/ or use a Google Fonts dependency.
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 
 val BlockMeTypography = Typography(

@@ -2,7 +2,7 @@ package com.blockme.core.domain.model
 
 /**
  * Domain model for a focus session.
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 data class FocusSession(
     val id: Long = 0,

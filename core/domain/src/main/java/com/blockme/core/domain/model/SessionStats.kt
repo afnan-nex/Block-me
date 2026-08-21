@@ -2,7 +2,7 @@ package com.blockme.core.domain.model
 
 /**
  * Aggregated session statistics.
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 data class SessionStats(
     val totalSessions: Int = 0,

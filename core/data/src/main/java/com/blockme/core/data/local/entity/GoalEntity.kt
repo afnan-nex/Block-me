@@ -6,7 +6,7 @@ import com.blockme.core.domain.model.FocusGoal
 
 /**
  * Room entity for a saved focus goal.
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 @Entity(tableName = "goals")
 data class GoalEntity(

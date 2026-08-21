@@ -50,15 +50,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.blockme.core.common.formatTimeWithAmPm
 import com.blockme.core.common.toShortDurationString
 import com.blockme.core.domain.model.FocusSchedule
 import com.blockme.core.domain.model.RepeatType
-import java.util.Locale
 
 /**
  * Material 3 Schedules Screen with Analog Clock TimePicker.
  *
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 @Composable
 fun ScheduleScreen(
@@ -180,14 +180,14 @@ private fun ScheduleCard(
         ) {
             Column(modifier = Modifier.weight(1f)) {
                 Text(
-                    text = String.format(Locale.getDefault(), "%02d:%02d", schedule.hourOfDay, schedule.minuteOfHour),
+                    text = formatTimeWithAmPm(schedule.hourOfDay, schedule.minuteOfHour),
                     style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
                     color = if (schedule.enabled) MaterialTheme.colorScheme.onSurface
                     else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.45f)
                 )
                 Spacer(modifier = Modifier.height(2.dp))
                 Text(
-                    text = "${schedule.durationMs.toShortDurationString()} · ${schedule.repeatType.label()}",
+                    text = "${schedule.durationMs.toShortDurationString()} · ${schedule.formattedDays()}",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -218,6 +218,16 @@ private fun ScheduleCard(
     }
 }
 
+private val DAYS_OF_WEEK = listOf(
+    java.util.Calendar.MONDAY to "Mon",
+    java.util.Calendar.TUESDAY to "Tue",
+    java.util.Calendar.WEDNESDAY to "Wed",
+    java.util.Calendar.THURSDAY to "Thu",
+    java.util.Calendar.FRIDAY to "Fri",
+    java.util.Calendar.SATURDAY to "Sat",
+    java.util.Calendar.SUNDAY to "Sun"
+)
+
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
 private fun AddScheduleDialog(
@@ -230,7 +240,19 @@ private fun AddScheduleDialog(
         is24Hour = false
     )
     var durationMs by remember { mutableLongStateOf(30 * 60_000L) }
-    var repeatType by remember { mutableStateOf(RepeatType.DAILY) }
+    var selectedDays by remember {
+        mutableStateOf(
+            setOf(
+                java.util.Calendar.MONDAY,
+                java.util.Calendar.TUESDAY,
+                java.util.Calendar.WEDNESDAY,
+                java.util.Calendar.THURSDAY,
+                java.util.Calendar.FRIDAY,
+                java.util.Calendar.SATURDAY,
+                java.util.Calendar.SUNDAY
+            )
+        )
+    }
     var goalText by remember { mutableStateOf("") }
 
     AlertDialog(
@@ -293,9 +315,9 @@ private fun AddScheduleDialog(
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // Repeat Mode
+                // Repeat Days Selection (All 7 Days)
                 Text(
-                    text = "Repeat",
+                    text = "Repeat Days",
                     style = MaterialTheme.typography.labelLarge,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.align(Alignment.Start)
@@ -305,14 +327,17 @@ private fun AddScheduleDialog(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    listOf(
-                        RepeatType.DAILY to "Every day",
-                        RepeatType.WEEKDAYS to "Weekdays",
-                        RepeatType.WEEKENDS to "Weekends"
-                    ).forEach { (type, label) ->
+                    DAYS_OF_WEEK.forEach { (day, label) ->
+                        val isSelected = selectedDays.contains(day)
                         FilterChip(
-                            selected = repeatType == type,
-                            onClick = { repeatType = type },
+                            selected = isSelected,
+                            onClick = {
+                                selectedDays = if (isSelected) {
+                                    if (selectedDays.size > 1) selectedDays - day else selectedDays
+                                } else {
+                                    selectedDays + day
+                                }
+                            },
                             label = { Text(label) }
                         )
                     }
@@ -333,6 +358,7 @@ private fun AddScheduleDialog(
         confirmButton = {
             Button(
                 onClick = {
+                    val isAll7 = selectedDays.size == 7
                     onConfirm(
                         FocusSchedule(
                             id = 0,
@@ -340,10 +366,8 @@ private fun AddScheduleDialog(
                             hourOfDay = timePickerState.hour,
                             minuteOfHour = timePickerState.minute,
                             durationMs = durationMs,
-                            repeatType = repeatType,
-                            customDays = if (repeatType == RepeatType.WEEKDAYS) setOf(2, 3, 4, 5, 6)
-                            else if (repeatType == RepeatType.WEEKENDS) setOf(1, 7)
-                            else setOf(1, 2, 3, 4, 5, 6, 7),
+                            repeatType = if (isAll7) RepeatType.DAILY else RepeatType.CUSTOM,
+                            customDays = selectedDays,
                             enabled = true,
                             goalText = goalText
                         )
@@ -361,9 +385,64 @@ private fun AddScheduleDialog(
     )
 }
 
-private fun RepeatType.label(): String = when (this) {
-    RepeatType.DAILY -> "Every day"
-    RepeatType.WEEKDAYS -> "Weekdays"
-    RepeatType.WEEKENDS -> "Weekends"
-    RepeatType.CUSTOM -> "Custom days"
+fun FocusSchedule.formattedDays(): String {
+    val days = if (customDays.isNotEmpty()) {
+        customDays
+    } else {
+        when (repeatType) {
+            RepeatType.WEEKDAYS -> setOf(
+                java.util.Calendar.MONDAY,
+                java.util.Calendar.TUESDAY,
+                java.util.Calendar.WEDNESDAY,
+                java.util.Calendar.THURSDAY,
+                java.util.Calendar.FRIDAY
+            )
+            RepeatType.WEEKENDS -> setOf(
+                java.util.Calendar.SATURDAY,
+                java.util.Calendar.SUNDAY
+            )
+            else -> setOf(
+                java.util.Calendar.SUNDAY,
+                java.util.Calendar.MONDAY,
+                java.util.Calendar.TUESDAY,
+                java.util.Calendar.WEDNESDAY,
+                java.util.Calendar.THURSDAY,
+                java.util.Calendar.FRIDAY,
+                java.util.Calendar.SATURDAY
+            )
+        }
+    }
+
+    val all7 = setOf(
+        java.util.Calendar.SUNDAY,
+        java.util.Calendar.MONDAY,
+        java.util.Calendar.TUESDAY,
+        java.util.Calendar.WEDNESDAY,
+        java.util.Calendar.THURSDAY,
+        java.util.Calendar.FRIDAY,
+        java.util.Calendar.SATURDAY
+    )
+    val weekdays = setOf(
+        java.util.Calendar.MONDAY,
+        java.util.Calendar.TUESDAY,
+        java.util.Calendar.WEDNESDAY,
+        java.util.Calendar.THURSDAY,
+        java.util.Calendar.FRIDAY
+    )
+    val weekends = setOf(
+        java.util.Calendar.SATURDAY,
+        java.util.Calendar.SUNDAY
+    )
+
+    return when {
+        days.containsAll(all7) -> "Every day"
+        days == weekdays -> "Mon - Fri"
+        days == weekends -> "Weekends"
+        else -> {
+            DAYS_OF_WEEK
+                .filter { days.contains(it.first) }
+                .joinToString(", ") { it.second }
+        }
+    }
 }
+

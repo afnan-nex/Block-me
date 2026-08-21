@@ -37,7 +37,7 @@ import com.blockme.core.ui.components.WeeklyBarChart
  * Visualizes focus metrics, streaks, temptation counts, and charts using
  * native Material 3 OutlinedCard containers and typography tokens.
  *
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 @Composable
 fun StatsScreen(

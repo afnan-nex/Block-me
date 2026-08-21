@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 
 /**
  * DAO for focus goals.
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 @Dao
 interface GoalDao {

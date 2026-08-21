@@ -7,7 +7,7 @@ import com.blockme.core.domain.model.RepeatType
 
 /**
  * Room entity for a recurring focus schedule.
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 @Entity(tableName = "schedules")
 data class ScheduleEntity(

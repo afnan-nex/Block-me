@@ -38,7 +38,7 @@ import com.blockme.core.common.toFormattedTime
  * @param strokeWidth Width of the progress ring stroke
  * @param textColor Color override for timer text (defaults to onSurface)
  *
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 @Composable
 fun CountdownTimerWidget(

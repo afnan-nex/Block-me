@@ -38,7 +38,7 @@ import javax.inject.Inject
  *    - Home launchers (which sit harmlessly behind the fullscreen overlay).
  * 4. Blocks prohibited user applications (Settings tamper, WhatsApp, Chrome, YouTube, Games) or Recents overview.
  *
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 @AndroidEntryPoint
 class LockdownAccessibilityService : AccessibilityService() {

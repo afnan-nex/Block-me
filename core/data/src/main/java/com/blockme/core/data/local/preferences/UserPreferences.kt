@@ -17,7 +17,7 @@ import javax.inject.Singleton
  * DataStore-backed user preferences.
  *
  * All session state is stored here so that it survives app restarts and reboots.
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 @Singleton
 class UserPreferences @Inject constructor(
@@ -47,7 +47,7 @@ class UserPreferences @Inject constructor(
     val lastDurationMs: Flow<Long>      = context.dataStore.data.map { it[KEY_LAST_DURATION_MS] ?: (30 * 60 * 1000L) }
     val hapticEnabled: Flow<Boolean>    = context.dataStore.data.map { it[KEY_HAPTIC_ENABLED] ?: false }
     val amoledMode: Flow<Boolean>       = context.dataStore.data.map { it[KEY_AMOLED_MODE] ?: false }
-    val unlockChallengeEnabled: Flow<Boolean> = context.dataStore.data.map { it[KEY_UNLOCK_CHALLENGE] ?: false }
+    val unlockChallengeEnabled: Flow<Boolean> = context.dataStore.data.map { it[KEY_UNLOCK_CHALLENGE] ?: true }
     val unlockChallengeType: Flow<String> = context.dataStore.data.map { it[KEY_UNLOCK_CHALLENGE_TYPE] ?: "MATH" }
     val onboardingComplete: Flow<Boolean> = context.dataStore.data.map { it[KEY_ONBOARDING_COMPLETE] ?: false }
     val isPhoneAppOpen: Flow<Boolean>   = context.dataStore.data.map { it[KEY_PHONE_APP_OPEN] ?: false }

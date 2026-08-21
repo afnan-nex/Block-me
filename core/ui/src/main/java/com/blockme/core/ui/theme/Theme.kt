@@ -21,7 +21,7 @@ import androidx.compose.ui.platform.LocalContext
  * - High-contrast AMOLED pure-black mode
  * - Standard M3 typography and shape scales
  *
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 
 val DarkColorScheme = darkColorScheme(

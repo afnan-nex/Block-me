@@ -43,7 +43,7 @@ import javax.inject.Inject
  * Service that maintains the persistent fullscreen lockdown overlay and mini floating dialer timer.
  * Runs as a standard window overlay service while TimerForegroundService manages the foreground session notification.
  *
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 @AndroidEntryPoint
 class LockdownOverlayService : Service(),
@@ -71,6 +71,7 @@ class LockdownOverlayService : Service(),
     private val goalText = mutableStateOf("")
     private val totalMs = mutableLongStateOf(0L)
     private val isPhoneAppMode = mutableStateOf(false)
+    private val isUnlockChallengeEnabled = mutableStateOf(true)
 
     // Current window position for floating mode
     private var floatingX = 40
@@ -85,6 +86,7 @@ class LockdownOverlayService : Service(),
                     // User unlocked device — ensure overlay is showing if active
                     scope.launch {
                         if (userPreferences.isSessionActive.first()) {
+                            isUnlockChallengeEnabled.value = userPreferences.unlockChallengeEnabled.first()
                             userPreferences.setPhoneAppOpen(false)
                             showOverlay()
                         } else {
@@ -134,6 +136,9 @@ class LockdownOverlayService : Service(),
             Constants.ACTION_SHOW_OVERLAY, null -> {
                 scope.launch {
                     val active = userPreferences.isSessionActive.first()
+                    isUnlockChallengeEnabled.value = userPreferences.unlockChallengeEnabled.first()
+                    goalText.value = userPreferences.sessionGoal.first()
+                    totalMs.longValue = userPreferences.sessionDurationMs.first()
                     if (active) {
                         showOverlay()
                         startSessionObserver()
@@ -170,6 +175,11 @@ class LockdownOverlayService : Service(),
             userPreferences.isPhoneAppOpen.collect { isOpen ->
                 isPhoneAppMode.value = isOpen
                 updateOverlayWindowParams(isOpen)
+            }
+        }
+        scope.launch {
+            userPreferences.unlockChallengeEnabled.collect { enabled ->
+                isUnlockChallengeEnabled.value = enabled
             }
         }
         scope.launch {
@@ -210,6 +220,7 @@ class LockdownOverlayService : Service(),
                     totalMs = totalMs.longValue,
                     goalText = goalText.value,
                     isPhoneAppMode = isPhoneAppMode.value,
+                    isUnlockChallengeEnabled = isUnlockChallengeEnabled.value,
                     onPhoneButtonClicked = {
                         scope.launch {
                             userPreferences.setPhoneAppOpen(true)

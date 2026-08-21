@@ -2,7 +2,7 @@ package com.blockme.app.navigation
 
 /**
  * Navigation destinations.
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 sealed class Screen(val route: String) {
     data object PermissionGate : Screen("permission_gate")

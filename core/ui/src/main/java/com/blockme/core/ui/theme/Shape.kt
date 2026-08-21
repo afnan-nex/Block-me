@@ -8,7 +8,7 @@ import androidx.compose.ui.unit.dp
  * Material 3 Shape scale tokens for Block me.
  *
  * Defines standard corner rounding across extraSmall to extraLarge containment.
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 val BlockMeShapes = Shapes(
     extraSmall = RoundedCornerShape(4.dp),

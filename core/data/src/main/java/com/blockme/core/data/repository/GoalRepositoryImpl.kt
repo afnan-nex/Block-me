@@ -12,7 +12,7 @@ import javax.inject.Singleton
 
 /**
  * Implementation of [GoalRepository] backed by Room.
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 @Singleton
 class GoalRepositoryImpl @Inject constructor(

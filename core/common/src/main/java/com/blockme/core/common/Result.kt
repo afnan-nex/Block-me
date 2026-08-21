@@ -2,7 +2,7 @@ package com.blockme.core.common
 
 /**
  * Generic result wrapper for data operations.
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 sealed class Result<out T> {
     data class Success<T>(val data: T) : Result<T>()

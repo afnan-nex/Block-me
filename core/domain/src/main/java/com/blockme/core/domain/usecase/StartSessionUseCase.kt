@@ -14,7 +14,7 @@ import javax.inject.Inject
  * - Duration must be > 0 and ≤ 3 hours
  * - Calculates absolute end time using wall-clock time
  *
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 class StartSessionUseCase @Inject constructor(
     private val sessionRepository: SessionRepository,

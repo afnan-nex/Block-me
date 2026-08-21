@@ -26,7 +26,7 @@ import com.blockme.feature.timer.TimerSetupScreen
 
 /**
  * Root navigation graph.
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 @Composable
 fun NavGraph(

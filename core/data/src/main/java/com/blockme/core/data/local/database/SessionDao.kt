@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 
 /**
  * DAO for focus sessions.
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 @Dao
 interface SessionDao {

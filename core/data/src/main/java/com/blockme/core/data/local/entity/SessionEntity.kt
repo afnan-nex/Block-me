@@ -6,7 +6,7 @@ import com.blockme.core.domain.model.FocusSession
 
 /**
  * Room entity for a focus session.
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 @Entity(tableName = "sessions")
 data class SessionEntity(

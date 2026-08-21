@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 /**
  * Repository interface for recurring focus schedules.
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  */
 interface ScheduleRepository {
     fun getAllSchedules(): Flow<List<FocusSchedule>>
